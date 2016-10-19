@@ -31,7 +31,7 @@ function createTableData(numRows, numCells) {
 
             if (i != j) {
                 newCell.contentEditable = "true";
-                newCell.innerText = "0";
+                newCell.innerText = "";
                 newCell.classList.add("data");
             } else {
                 newCell.classList.add("no-data");
