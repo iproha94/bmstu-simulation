@@ -29,18 +29,11 @@ function createTableData(numRows, numCells) {
         for (let j = 0; j < numCells; ++j) {
             let newCell = newRow.insertCell(-1); 
 
-            if (i != j) {
-                newCell.contentEditable = "true";
-                newCell.innerText = "";
-                newCell.classList.add("data");
-            } else {
-                newCell.classList.add("no-data");
-            }
-
+            newCell.contentEditable = "true";
+            newCell.innerText = "";
+            newCell.classList.add("data");
         }        
     }
-
-
 
     document.body.appendChild(table);
 } 

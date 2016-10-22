@@ -52,17 +52,13 @@ function getKoefKolmagorof(matrix) {
 
     for (let i = 0, n = matrix.length; i < n; ++i) {
         for (let j = 0, m = matrix[i].length; j < m; ++j) {
-        	if (i != j) {
-            	result[i][i] -= matrix[i][j];
-        	}
+        	result[i][i] -= matrix[i][j];
         }
     }
 
     for (let i = 0, n = matrix.length; i < n; ++i) {
         for (let j = 0, m = matrix[i].length; j < m; ++j) {
-        	if (i != j) {
-            	result[j][i] += matrix[i][j];
-        	}
+        	result[j][i] += matrix[i][j];
         }
     }
 
