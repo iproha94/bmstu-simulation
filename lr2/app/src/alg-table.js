@@ -97,9 +97,17 @@ function run(mode) {
 
     let tableData = document.getElementById("tbl-data");
     
-    tableData.rows[0].cells[1].innerText = MIN_0 + "-" + MAX_0;
-    tableData.rows[0].cells[2].innerText = MIN_1 + "-" + MAX_1;
-    tableData.rows[0].cells[3].innerText = MIN_2 + "-" + MAX_2;
+    
+
+    if (binaryMode) {
+        tableData.rows[0].cells[1].innerText = MIN_0.toString(2).substring(1) + " - " + MAX_0.toString(2).substring(1);
+        tableData.rows[0].cells[2].innerText = MIN_1.toString(2).substring(1) + " - " + MAX_1.toString(2).substring(1);
+        tableData.rows[0].cells[3].innerText = MIN_2.toString(2).substring(1) + " - " + MAX_2.toString(2).substring(1);
+    } else {
+        tableData.rows[0].cells[1].innerText = MIN_0 + "-" + MAX_0;
+        tableData.rows[0].cells[2].innerText = MIN_1 + "-" + MAX_1;
+        tableData.rows[0].cells[3].innerText = MIN_2 + "-" + MAX_2;
+    }
 
     for (let r = 1, n = numStr + 1; r < n; ++r) {
         if (binaryMode) {
