@@ -6,8 +6,21 @@
 </head>
 <body>
 	<h1>Ручной ввод</h1>
+
 	<script src="src/kernel.js"></script>
-	<script src="src/my-table.js"></script>
-	<p><button onclick="run()">Запуск</button></p>
+	<script src="src/table.js"></script>
+	<script src="src/my.js"></script>
+
+	<script>
+		var numStr = 10;
+		numStr = parseInt(prompt("Введите кол-во чисел для ручного ввода", numStr));
+		
+		var numColumns = 1;
+		var numTests = 2;
+
+		createTableData(numStr, numColumns, numTests);
+	</script>
+
+	<p><button onclick="run(numStr)">Запуск</button></p>
 </body> 
 </html> 

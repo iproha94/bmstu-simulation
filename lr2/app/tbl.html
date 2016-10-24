@@ -2,12 +2,30 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="mystyle.css">
-	<script src="src/kernel.js"></script>
 </head>
 <body>
 	<h1>Табличный способ</h1>
-	<p>аппаратный способ получения чисел</p>
-	<script src="src/tbl-table.js"></script>
-	<p><button onclick="run()">Запуск</button></p>
+	<p>таблица по
+	<a href="http://stratum.ac.ru/education/textbooks/modelir/lection22-01.html">ссылке</a> </p>
+
+	<script src="src/kernel.js"></script>
+	<script src="src/table.js"></script>
+	<script src="src/tbl.js"></script>
+
+	<script>
+		var numStr = 15;
+		numStr = parseInt(prompt("Введите кол-во показываемых чисел в таблице для табличного режима (max 500)", numStr));
+
+		if (numStr > 500) numStr = 15;
+
+		var numColumns = 3;
+		var numTests = 2;
+
+		createTableData(numStr, numColumns, numTests);
+	</script>
+
+
+
+	<p><button onclick="run(numStr)">Запуск</button></p>
 </body> 
 </html> 

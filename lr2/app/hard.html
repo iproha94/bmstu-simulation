@@ -1,0 +1,30 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+	<h1>Aппаратный способ</h1>
+	<p>из устройства /dev/urandom</p>
+
+	<script src="src/kernel.js"></script>
+	<script src="src/table.js"></script>
+	<script src="src/hard.js"></script>
+
+	<script>
+		var numStr = 15;
+		numStr = parseInt(prompt("Введите кол-во показываемых чисел в таблице для аппаратного режима (max 1000)", numStr));
+
+		if (numStr > 1000) numStr = 15;
+
+		var numColumns = 3;
+		var numTests = 2;
+
+		createTableData(numStr, numColumns, numTests);
+	</script>
+
+
+
+	<p><button onclick="run(numStr)">Запуск</button></p>
+</body> 
+</html> 

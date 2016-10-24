@@ -1,69 +1,4 @@
-var numStr = 15;
-var num = 1000;
-
-function createTableData(numRows, numTests) {
-    var table = document.createElement("table"); 
-    table.id = "tbl-data"; 
-    table.width = 300; 
-    table.border = 1; 
-
-    let titleRow = table.insertRow(-1);
-
-    let newCell = titleRow.insertCell(-1);
-    newCell.classList.add("head"); 
-    newCell.innerText = "";
-
-    newCell = titleRow.insertCell(-1);
-    newCell.classList.add("head"); 
-    newCell.innerText = "NaN";
-
-    newCell = titleRow.insertCell(-1);
-    newCell.classList.add("head"); 
-    newCell.innerText = "NaN";
-
-    newCell = titleRow.insertCell(-1);
-    newCell.classList.add("head"); 
-    newCell.innerText = "NaN";
-
-    for (let i = 1; i <= numRows; ++i) {
-        let newRow = table.insertRow(-1);
-        
-        let newCell = newRow.insertCell(-1); 
-        newCell.innerText = i;
-        newCell.classList.add("left-hand");
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("data"); 
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("data"); 
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("data");        
-     
-    }
-
-    for (let i = 1; i <= numTests; ++i) {
-        let newRow = table.insertRow(-1);
-           
-        let newCell = newRow.insertCell(-1); 
-        newCell.innerText = "test #" + i;
-        newCell.classList.add("left-hand-test");
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("test");
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("test");
-
-        newCell = newRow.insertCell(-1);
-        newCell.classList.add("test");
-    }
-
-    document.body.appendChild(table);
-} 
-
-function run(mode) {
+function run(mode, num, numStr) {
     let arr0_9 = [];
     let arr10_99 = [];
     let arr100_999 = [];
@@ -136,24 +71,35 @@ function run(mode) {
         }
     }
 
+
+
+    let result = identicalConsecutiveBitstest(str0);
     tableData.rows[numStr + 1].cells[1].classList.remove("false", "true");
+    tableData.rows[numStr + 1].cells[1].classList.add(result > 0.01);
+    tableData.rows[numStr + 1].cells[1].innerText = (result * 100).toFixed(1) + "%";
+
+    result = identicalConsecutiveBitstest(str1);
     tableData.rows[numStr + 1].cells[2].classList.remove("false", "true");
+    tableData.rows[numStr + 1].cells[2].classList.add(result > 0.01);
+    tableData.rows[numStr + 1].cells[2].innerText =  (result * 100).toFixed(1) + "%";
+
+    result = identicalConsecutiveBitstest(str2);
     tableData.rows[numStr + 1].cells[3].classList.remove("false", "true");
+    tableData.rows[numStr + 1].cells[3].classList.add(result > 0.01);
+    tableData.rows[numStr + 1].cells[3].innerText = (result * 100).toFixed(1) + "%";
 
+    result = frequencyBitwiseTest(str0);
     tableData.rows[numStr + 2].cells[1].classList.remove("false", "true");
+    tableData.rows[numStr + 2].cells[1].classList.add(result > 0.01);
+    tableData.rows[numStr + 2].cells[1].innerText =  (result * 100).toFixed(1) + "%";
+
+    result = frequencyBitwiseTest(str1);
     tableData.rows[numStr + 2].cells[2].classList.remove("false", "true");
+    tableData.rows[numStr + 2].cells[2].classList.add(result > 0.01);
+    tableData.rows[numStr + 2].cells[2].innerText = (result * 100).toFixed(1) + "%";
+
+    result = frequencyBitwiseTest(str2);
     tableData.rows[numStr + 2].cells[3].classList.remove("false", "true");
-
-
-    tableData.rows[numStr + 1].cells[1].classList.add(identicalConsecutiveBitstest(str0));
-    tableData.rows[numStr + 1].cells[2].classList.add(identicalConsecutiveBitstest(str1));
-    tableData.rows[numStr + 1].cells[3].classList.add(identicalConsecutiveBitstest(str2));
-
-    tableData.rows[numStr + 2].cells[1].classList.add(frequencyBitwiseTest(str0));
-    tableData.rows[numStr + 2].cells[2].classList.add(frequencyBitwiseTest(str1));
-    tableData.rows[numStr + 2].cells[3].classList.add(frequencyBitwiseTest(str2));
+    tableData.rows[numStr + 2].cells[3].classList.add(result > 0.01);
+    tableData.rows[numStr + 2].cells[3].innerText = (result * 100).toFixed(1) + "%";
 } 
-
-numStr = parseInt(prompt("Введите кол-во чисел показываемых чисел для алгоритмического режима", numStr));
-num = parseInt(prompt("Введите кол-во генерируемых чисел для алгоритмического режима", num));
-createTableData(numStr, 2);

@@ -2,13 +2,29 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="mystyle.css">
-	<script src="src/kernel.js"></script>
 </head>
 <body>
 	<h1>Алгоритмический способ</h1>
 	<p>встроенный в язык random</p>
-	<script src="src/alg-table.js"></script>
-	<p><button onclick="run(true)">Запуск бинарный режим</button></p>
-	<p><button onclick="run(false)">Запуск десятичный режим</button></p>
+
+	<script src="src/kernel.js"></script>
+	<script src="src/table.js"></script>
+	<script src="src/alg.js"></script>
+	
+	<script>
+		var num = 1000;
+		num = parseInt(prompt("Введите кол-во генерируемых чисел для алгоритмического режима", num));
+
+		var numStr = 15;
+		numStr = parseInt(prompt("Введите кол-во показываемых чисел в таблице для алгоритмического режима", numStr));
+
+		var numColumns = 3;
+		var numTests = 2;
+
+		createTableData(numStr,numColumns, numTests);
+	</script>
+	
+	<p><button onclick="run(true, num, numStr)">Запуск бинарный режим</button></p>
+	<p><button onclick="run(false, num, numStr)">Запуск десятичный режим</button></p>
 </body> 
 </html> 

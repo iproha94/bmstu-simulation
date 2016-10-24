@@ -37,7 +37,7 @@ function frequencyBitwiseTest(str) {
 
 	let p = erfc(sobs / Math.sqrt(2));
 
-	return p > 0.01;
+	return p;
 }
 
 function identicalConsecutiveBitstest(str) {
@@ -60,7 +60,7 @@ function identicalConsecutiveBitstest(str) {
 
 	let p = erfc(Math.abs(v - 2 * n * pi * (1 - pi)) / (2 * pi * (1 - pi) * Math.sqrt(2 * n)));
 
-	return p > 0.01;
+	return p;
 }
 
 function getRandomInt(min, max) {
