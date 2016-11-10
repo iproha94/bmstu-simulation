@@ -7,7 +7,7 @@ function ServiceUnitByPoisson(releasingOrder, lambda) {
 	self.lambda = lambda;
 
 	self.getNextTime = function() {
-		return randByPoisson(lambda);
+		return randByPoisson(self.lambda);
 	}
 
 	self.run = function(bm) {
