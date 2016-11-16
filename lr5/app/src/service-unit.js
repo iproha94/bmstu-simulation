@@ -16,8 +16,8 @@ function ServiceUnit(min, max) {
 		return isFree;
 	}
 
-	self.pushWork = function() {
+	self.pushWork = function(nowTime) {
 		isFree = false;
-		timeNewWork += randFromMinToMax(self.min, self.max);
+		timeNewWork = nowTime + randFromMinToMax(self.min, self.max);
 	}
 } 

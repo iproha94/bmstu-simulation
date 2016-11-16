@@ -1,6 +1,5 @@
 include('src/source-of-information.js'); 
 include('src/service-unit.js');
-include('src/memory.js'); 
 include('src/chart.js'); 
 
 function findProbabilityOfFailure(simulator, lClient, lOperators, lStores) {
@@ -15,29 +14,40 @@ function findProbabilityOfFailure(simulator, lClient, lOperators, lStores) {
 	let amountRequest = 0;
 	let amountLost = 0;
 
-	while (amountRequest < simulator.amountRequest) {
-		nowTime += simulator.dt;
-		
-		if (!client.isRequest(nowTime)) continue;
+    let dataState = [];
 
-		let isServed = operators.some(operator => {
-			if (operator.isFree(nowTime)) {
-				operator.pushWork();
+    let needServed = simulator.amountRequest;
+
+	while (amountRequest < needServed) {
+		if (client.isRequest(nowTime)) {
+			let isServed = operators.some(operator => {
+				if (operator.isFree(nowTime)) {
+					operator.pushWork(nowTime);
+					client.reset();
+					return true;
+				}
+
+				return false;
+			})
+
+			dataState.push([nowTime, isServed ? 0 : 1]);
+			
+			if (!isServed) {
+				++amountLost;
 				client.reset();
-				return true;
+
+				if (!simulator.onInput) ++needServed;
 			}
-
-			return false;
-		})
-
-		if (!isServed) {
-			++amountLost;
-			client.reset();
+	
+			++amountRequest;
 		}
 
-		++amountRequest;
+		
+		
+		nowTime += simulator.dt;
 	}
 
+    drawChart("chart1", 1, ['отказ'], dataState);
 
 	return amountLost / amountRequest;
 }
