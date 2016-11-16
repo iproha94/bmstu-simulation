@@ -117,12 +117,20 @@
 			let result = findProbabilityOfFailure(simulator, client, operators, stores);
 
 			console.log(result);
-			document.getElementById('sm-probability_failure').value = result;
+			document.getElementById('sm-probability_failure').value = result.probabilityFailure;
+			document.getElementById('sm-amount_lost').value = result.amountLost;
+			document.getElementById('sm-amount_input').value = result.amountInput;
+			document.getElementById('sm-amount_output').value = result.amountOutput;
+			document.getElementById('sm-all_time').value = result.allTime;
 		}
 	</script>
 
-	<p><button onclick="run()">найти вероятность отказа</button></p>
-	<label>Вероятность отказа: <input type="text" id="sm-probability_failure" readonly></label>
+	<p><button onclick="run()">Запуск</button></p>
+	<label>Вероятность отказа: <input type="text" id="sm-probability_failure" readonly></label><br /> 
+	<label>Кол-во потеряных заявок: <input type="text" id="sm-amount_lost" readonly></label><br />
+	<label>Кол-во зашедших заявок: <input type="text" id="sm-amount_input" readonly></label><br />
+	<label>Кол-во обработанных заявок: <input type="text" id="sm-amount_output" readonly></label><br />
+	<label>Время работы системы: <input type="text" id="sm-all_time" readonly></label>
 
 	<hr />
 

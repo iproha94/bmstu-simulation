@@ -11,13 +11,15 @@ function SourceOfInformation(min, max) {
 	let timeNewOrder = randFromMinToMax(self.min, self.max);
 
 	self.isRequest = function(nowTime) {
-		if (nowTime >= timeNewOrder) isRequest = true;
+		if (nowTime >= timeNewOrder && !isRequest)  {
+			isRequest = true;
+			timeNewOrder += randFromMinToMax(self.min, self.max);
+		}
 
 		return isRequest;
 	}
 
 	self.reset = function() {
-		timeNewOrder += randFromMinToMax(self.min, self.max);
 		isRequest = false;
 	}
 }
