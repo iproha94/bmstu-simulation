@@ -1,0 +1,126 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Управляющая программа имитационной модели супермаркета</title>
+
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+	<script src="src/include.js"></script>
+
+	<script src="src/supermarket.js"></script>
+</head>
+<body>
+	<h1>Управляющая программа имитационной модели супермаркета (принцип dt)</h1>
+
+	<h3>Параметры имитационной модели</h3>
+
+	<label>шаг времени: <input type="text" id="sm-dt" value="0.1"></label><br />
+	
+	<hr />
+	<h3>Покупатели</h3>
+
+	<label>кол-во обслуженных: <input type="text" id="buyer-amount" value="100"></label><br />
+	<label>параметр lambda Пуассоновского потока: <input type="text" id="buyer-lambda" value="10"></label><br />
+
+	<h4>колличество товаров у покупателя:</h4>
+	<label>min: <input type="text" id="buyer-min_goods" value="1"></label><br />
+	<label>max: <input type="text" id="buyer-max_goods" value="15"></label><br />
+
+
+	<hr />
+	<h3>Быстрые кассы:</h3>
+
+	<label>кол-во: <input type="text" id="cashier_fast-amount" value="2"></label><br />
+
+	<label>максимальное число товаров: <input type="text" id="cashier_fast-max_weight" value="5"></label><br />
+
+	<h4>интервал времени обслуживания:</h4>
+	<label>min: <input type="text" id="cashier_fast-min_time" value="20"></label><br />
+	<label>max: <input type="text" id="cashier_fast-max_time" value="60"></label><br />
+
+	<hr />
+	<h3>Обычные кассы:</h3>
+
+	<label>кол-во: <input type="text" id="cashier-amount" value="8"></label><br />
+
+	<h4>интервал времени обслуживания:</h4>
+	<label>min: <input type="text" id="cashier-min_time" value="60"></label><br />
+	<label>max: <input type="text" id="cashier-max_time" value="200"></label><br />
+
+
+	<hr />
+	<h3>Терминалы оплаты:</h3>
+
+	<label>кол-во: <input type="text" id="terminal-amount" value="7"></label><br />
+
+	<h4>интервал времени обслуживания:</h4>
+	<label>min: <input type="text" id="terminal-min_time" value="30"></label><br />
+	<label>max: <input type="text" id="terminal-max_time" value="60"></label><br />
+
+	<script>
+		function run() {
+			let simulator = {
+				dt: parseFloat(document.getElementById('sm-dt').value)
+			}
+
+			let buyer = {
+				min: parseInt(document.getElementById('buyer-min_goods').value),
+				max: parseInt(document.getElementById('buyer-max_goods').value),
+				lambda: parseInt(document.getElementById('buyer-lambda').value),
+				amount: parseInt(document.getElementById('buyer-amount').value),
+			};
+
+			let cashier_fast = {
+				max_weight: parseInt(document.getElementById('cashier_fast-max_weight').value),
+				amount: parseInt(document.getElementById('cashier_fast-amount').value),
+				min: parseInt(document.getElementById('cashier_fast-min_time').value),
+				max: parseInt(document.getElementById('cashier_fast-max_time').value)
+			};
+			if (cashier_fast.amount < 1) throw new Error("not enough cashier_fast");
+
+
+			let cashier = {
+				amount: parseInt(document.getElementById('cashier-amount').value),
+				min: parseInt(document.getElementById('cashier-min_time').value),
+				max: parseInt(document.getElementById('cashier-max_time').value)
+			};
+			if (cashier.amount < 1) throw new Error("not enough cashiers");
+
+
+			let terminal = {
+				amount: parseInt(document.getElementById('terminal-amount').value),
+				min: parseInt(document.getElementById('terminal-min_time').value),
+				max: parseInt(document.getElementById('terminal-max_time').value)
+			}
+
+			console.log(simulator);
+			console.log(buyer);
+			console.log(cashier_fast);
+			console.log(cashier);
+			console.log(terminal);
+
+			let result = simulate(simulator, buyer, cashier_fast,  cashier, terminal);
+
+			console.log(result);
+			document.getElementById('sm-all_time').value = result.allTime;
+			document.getElementById('sm-amount_input').value = result.amountInput;
+			document.getElementById('sm-amount_output').value = result.amountOutput;
+		}
+	</script>
+
+	<hr />
+	<p><button onclick="run()">Запуск</button></p><br />
+
+	<label>время работы системы: <input type="text" id="sm-all_time" readonly></label><br />
+	<label>зашло покупателей: <input type="text" id="sm-amount_input" readonly></label><br />
+	<label>вышло покупателей: <input type="text" id="sm-amount_output" readonly></label><br />
+	
+	<hr />
+    <h3>Состояние очередей на быстрые кассы</h3>
+	<div id="chart1" style="width: 1600px; height: 900px"></div>
+
+	<h3>Состояние очередей на обычные кассы</h3>
+	<div id="chart2" style="width: 1600px; height: 900px"></div>
+
+</body> 
+</html>
