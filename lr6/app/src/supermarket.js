@@ -3,7 +3,7 @@ include('src/service-unit.js');
 include('src/chart.js');
 include('src/random.js');
 
-function simulate(simulator, aBuyer, cashier_fast, cashier, terminal) {
+function simulate(simulator, aBuyer, cashier_fast, cashier) {
 	let buyer = new SourceOfInformation(
 		{
 			randFunc: randByPoisson, 
@@ -18,21 +18,15 @@ function simulate(simulator, aBuyer, cashier_fast, cashier, terminal) {
 
 	let fastCashiers = []
 	for (let i = 0; i < cashier_fast.amount; ++i) {
-		fastCashiers.push(new ServiceUnit(randFromMinToMax, [cashier_fast.min, cashier_fast.max]));
+		fastCashiers.push(new ServiceUnit(cashier.timePerRequest));
 	}
 	console.log(fastCashiers)
 
 	let cashiers = []
 	for (let i = 0; i < cashier.amount; ++i) {
-		cashiers.push(new ServiceUnit(randFromMinToMax, [cashier.min, cashier.max]));
+		cashiers.push(new ServiceUnit(cashier.timePerRequest));
 	}
 	console.log(cashiers)
-
-	let terminals = []
-	for (let i = 0; i < terminal.amount; ++i) {
-		terminals.push(new ServiceUnit(randFromMinToMax, [terminal.min, terminal.max]));
-	}
-	console.log(terminals)
 
 	let nowTime = 0;
 	let amountInput = 0;
