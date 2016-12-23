@@ -1,12 +1,12 @@
-	GENERATE	7.5, 2.5				;генерируем заявки
+    GENERATE    7.5, 2.5                ;генерируем заявки
 
-retr	TEST L	Q$Tran,2,QUITMET		;проверяем длину очереди
-	QUEUE	Tran						;вход в очередь для отчетов
-	SEIZE	QAMAN						;занимаем блок
-	DEPART	Tran						;выходим из очереди (для отчета)
-	ADVANCE	(POISSON(1,7.5))			;задерживаемся в блоке на это время
-	RELEASE	QAMAN						;выходим из блока
-	TRANSFER	.0,QUITMET,retr			;решаем куда пустить транзакт
+retr    TEST L  Q$Tran,2,QUITMET        ;проверяем длину очереди
+    QUEUE   Tran                        ;вход в очередь для отчетов
+    SEIZE   QAMAN                       ;занимаем блок
+    DEPART  Tran                        ;выходим из очереди (для отчета)
+    ADVANCE (POISSON(1,7.5))            ;задерживаемся в блоке на это время
+    RELEASE QAMAN                       ;выходим из блока
+    TRANSFER    .0,QUITMET,retr         ;решаем куда пустить транзакт
 
-QUITMET	TERMINATE	1					;убиваем транзакт
-	START 100
+QUITMET TERMINATE   1                   ;убиваем транзакт
+    START 100
