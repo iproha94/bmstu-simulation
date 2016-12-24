@@ -1,6 +1,6 @@
 # BmstuSimulation
 
-[основа для отчетов](https://github.com/iproha94/base-for-tex-rpz)
+Лабораторные работы по курсу **моделирование (7 семестр)**
 
 **Язык:** JavaScript
 
